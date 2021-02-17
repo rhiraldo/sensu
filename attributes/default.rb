@@ -28,6 +28,7 @@ default["sensu"]["log_directory_mode"] = "0750"
 
 default["sensu"]["apt_repo_url"] = "http://eol-repositories.sensuapp.org/apt"
 default["sensu"]["yum_repo_url"] = "https://packagecloud.io"
+default["sensu"]["yum_key_url"] = "https://packagecloud.io/sensu/stable/gpgkey"
 default["sensu"]["msi_repo_url"] = "http://eol-repositories.sensuapp.org/msi"
 default["sensu"]["add_repo"] = true
 

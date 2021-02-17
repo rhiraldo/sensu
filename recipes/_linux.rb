@@ -58,7 +58,6 @@ when "rhel", "fedora"
     metadata_expire "300"
     action :add
     only_if { node["sensu"]["add_repo"] }
-    repo_gpg
   end
   repo.gpgcheck(false) if repo.respond_to?(:gpgcheck)
 
