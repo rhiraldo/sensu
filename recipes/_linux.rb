@@ -47,10 +47,18 @@ when "debian"
 when "rhel", "fedora"
   repo = yum_repository "sensu" do
     description "sensu monitoring"
-    repo = node["sensu"]["use_unstable_repo"] ? "yum-unstable" : "yum"
-    url "#{node['sensu']['yum_repo_url']}"
+    repo = "sensu/stable/el"
+    releasever_string = node["sensu"]["yum_repo_releasever"] || "$releasever"
+    baseurl "#{node['sensu']['yum_repo_url']}/#{repo}/#{releasever_string}/$basearch/"
+    gpgcheck false
+    repo_gpgcheck true
+    gpgkey node['sensu']['yum_key_url']
+    sslverify true
+    sslcacert "/etc/pki/tls/certs/ca-bundle.crt"
+    metadata_expire "300"
     action :add
     only_if { node["sensu"]["add_repo"] }
+    repo_gpg
   end
   repo.gpgcheck(false) if repo.respond_to?(:gpgcheck)
 
